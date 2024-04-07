@@ -14,11 +14,15 @@ jobs:
       - name: Login to Hugging Face
         uses: Hugging Face/action-hub-docker-login@v1
         with:
+          email: ${{ secrets.HUGGINGFACE_EMAIL }}
           hf-api-token: ${{ secrets.HUGGINGFACE_TOKEN }}
+          hf_app_name: ${{ secrets.HEROKU_APP_NAME }}
 
-      - name: Build and Push to Hugging Face Spaces
+      - name: Build, Push and Release to Hugging Face Spaces
         uses: Hugging Face/action-hub-push@v1
         with:
+          email: ${{ secrets.HUGGINGFACE_EMAIL }}
           hf-api-token: ${{ secrets.HUGGINGFACE_TOKEN }}
+          hf_app_name: ${{ secrets.HEROKU_APP_NAME }}
           dockerfile: Dockerfile
           context: ./
